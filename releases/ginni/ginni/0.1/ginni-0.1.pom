@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ginni</groupId>
+    <artifactId>ginni</artifactId>
+    <name>Ginni</name>
+    <packaging>jar</packaging>
+    <version>0.1</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>ginni</groupId>
+            <artifactId>ginni_tool</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>ginni.tool.GinniMain</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.7</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.springframework.build.aws</groupId>
+                        <artifactId>org.springframework.build.aws.maven</artifactId>
+                        <version>3.0.0.RELEASE</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/uber.xml</descriptor>
+                    </descriptors>
+                    <archive>
+                        <manifest>
+                            <mainClass>ginni.tool.GinniMain</mainClass>
+                        </manifest>
+                    </archive>
+                    <finalName>${project.artifactId}</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <configuration>
+                            <skip>false</skip>
+                            <target name="jar">
+                                <taskdef name="jarjar" classname="com.tonicsystems.jarjar.JarJarTask" />
+                                <jarjar jarfile="target/ginni-final.jar">
+                                    <zipfileset src="target/ginni.jar" />
+
+                                    <rule pattern="org.cyberneko.**" result="ginni._thirdparty.org.cyberneko.@1" />
+                                    <rule pattern="org.apache.**" result="ginni._thirdparty.org.apache.commons.@1" />
+                                    <rule pattern="org.joda.**" result="ginni._thirdparty.org.joda.@1" />
+                                    <rule pattern="org.joda.**" result="ginni._thirdparty.org.joda.@1" />
+                                    <rule pattern="org.ho.**" result="ginni._thirdparty.org.ho.@1" />
+                                    <rule pattern="org.yaml.**" result="ginni._thirdparty.org.yaml.@1" />
+                                    <rule pattern="com.petebevin.**" result="ginni._thirdparty.com.petebevin.@1" />
+                                    <rule pattern="org.jboss.netty.**" result="ginni._thirdparty.org.jboss.netty.@1" />
+
+                                    <rule pattern="org.aopalliance.**" result="ginni._thirdparty.org.aopalliance.@1" />
+                                    <rule pattern="com.google.template.**" result="ginni._thirdparty.com.google.template.@1" />
+                                    <rule pattern="com.google.common.**" result="ginni._thirdparty.com.google.common.@1" />
+                                    <rule pattern="com.google.gson.**" result="ginni._thirdparty.com.google.gson.@1" />
+                                    <rule pattern="com.google.inject.**" result="ginni._thirdparty.com.google.inject.@1" />
+                                    <rule pattern="javax.inject.**" result="ginni._thirdparty.javax.inject.@1" />
+                                    <rule pattern="javax.annotation.**" result="ginni._thirdparty.javax.annotation.@1" />
+                                    <rule pattern="javax.activation.**" result="ginni._thirdparty.javax.activation.@1" />
+
+                                    <rule pattern="com.google.inject.internal.**" result="ginni._thirdparty.com.google.inject.internal.@1" />
+                                    <rule pattern="com.google.inject.spi.**" result="ginni._thirdparty.com.google.inject.spi.@1" />
+                                    <rule pattern="com.google.debugging.**" result="ginni._thirdparty.com.google.debugging.@1" />
+                                    <rule pattern="com.google.javascript.**" result="ginni._thirdparty.com.google.javascript.@1" />
+                                    <rule pattern="com.google.protobuf.**" result="ginni._thirdparty.com.google.protobuf.@1" />
+                                    <rule pattern="com.googlecode.htmlcompressor.**" result="ginni._thirdparty.com.googlecode.htmlcompressor.@1" />
+
+                                    <rule pattern="org.slf4j.**" result="ginni._thirdparty.org.slf4j.@1" />
+                                    <rule pattern="ch.qos.logback.classic.**" result="ginni._thirdparty.ch.qos.logback.classic.@1" />
+                                    <rule pattern="ch.qos.logback.core.*.**" result="ginni._thirdparty.ch.qos.logback.core.@1.@2" />
+                                    <rule pattern="com.yahoo.**" result="ginni._thirdparty.com.yahoo.@1" />
+                                    <rule pattern="org.kohsuke.**" result="ginni._thirdparty.org.kohsuke.@1" />
+                                    <rule pattern="jargs.**" result="ginni._thirdparty.jargs.@1" />
+
+                                    <!--<rule pattern="org.mozilla.**" result="ginni._thirdparty.org.mozilla.@1" />-->
+
+                                    <zap pattern="com.ibm.icu.**" />
+
+                                    <!--
+                                    <zap pattern="com.google.common.net.**" />
+                                    <zap pattern="com.google.common.primitives.**" />
+                                    <zap pattern="com.google.common.math.**" />
+                                    <zap pattern="com.google.common.hash.**" />
+                                    <zap pattern="com.google.common.collect.**" />
+                                    <zap pattern="com.google.common.eventbus.**" />
+                                    <zap pattern="com.google.common.util.**" />
+                                    <zap pattern="com.google.common.cache.**" />
+                                    -->
+
+
+                                    <manifest>
+                                        <attribute name="Main-Class" value="ginni.tool.GinniMain" />
+                                    </manifest>
+                                </jarjar>
+
+
+                                <delete file="target/ginni.jar" />
+                                <move file="target/ginni-final.jar" toFile="target/ginni.jar" />
+
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>jarjar</groupId>
+                        <artifactId>jarjar</artifactId>
+                        <version>1.3</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
