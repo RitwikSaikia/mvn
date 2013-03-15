@@ -11,3 +11,5 @@ Maven repository for all build artifacts
 </repositories>
 ```
 
+
+If you want to browse, the artifacts are stored under [gh_pages](https://github.com/RitwikSaikia/mvn/tree/gh-pages/releases) brannch.
