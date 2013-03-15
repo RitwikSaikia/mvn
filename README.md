@@ -12,4 +12,4 @@ Maven repository for all build artifacts
 ```
 
 
-If you want to browse, the artifacts are stored under [gh_pages](https://github.com/RitwikSaikia/mvn/tree/gh-pages/releases) brannch.
+If you want to browse, the artifacts are stored under [gh_pages](https://github.com/RitwikSaikia/mvn/tree/gh-pages/releases) branch.
