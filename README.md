@@ -23,4 +23,4 @@ For development snapshots
 ```
 
 
-If you want to browse, the artifacts are stored under [gh-pages](https://github.com/RitwikSaikia/mvn/tree/gh-pages/releases) branch.
+If you want to browse, the artifacts are stored under [gh-pages](https://github.com/RitwikSaikia/mvn/tree/gh-pages) branch.
