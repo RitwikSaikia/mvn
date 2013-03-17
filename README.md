@@ -12,7 +12,8 @@ Maven repository for all build artifacts
 ```
 
 
-For development snapshots
+For development snapshots. 
+(This is only to verify newly fixed issues, don't use it for long time, as old artifacts are periodically trashed).
 ```xml
 <repositories>
     <repository>
