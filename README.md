@@ -16,7 +16,7 @@ For development snapshots
 ```xml
 <repositories>
     <repository>
-        <id>ritwik-mvn-repo</id>
+        <id>ritwik-mvn-repo-snapshots</id>
         <url>http://ritwik.net/mvn/snapshots/</url>
     </repository>
 </repositories>
